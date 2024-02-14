@@ -43,6 +43,12 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
         Route::get('/products','index');
         Route::get('/products/create', 'create');
         Route::post('/products', 'store');
+        Route::get('/product/{product}/edit', 'edit');
+        Route::get('/product_image/{image}/delete','destroy_image');
+        Route::put('/product/{product}','update');
+        Route::get('/product/{product}/delete', 'destroy');
+
+
 
     });
    
