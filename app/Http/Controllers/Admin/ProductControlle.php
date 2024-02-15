@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Color;
 
 class ProductControlle extends Controller
 {
@@ -23,11 +24,13 @@ class ProductControlle extends Controller
     {
         $categories=Category::all();
         $brans=Brand::all();
-        return view('admin.product.create',compact('categories','brans'));
+        $colors=Color::all();
+        return view('admin.product.create',compact('categories','brans','colors'));
     }
     public function store(ProductFormRequest $request)
     {
         // dd( $request->category_id );
+        // dd($request->produc_colors);
         $validatedData=$request->validated();
         $category=Category::find($validatedData['category_id']);
         $product=$category->products()->create([
@@ -60,6 +63,18 @@ class ProductControlle extends Controller
                     'image'=>$fileName,
                 ]);
             }
+        }
+        if($request->produc_colors)
+        {
+            foreach ($request->produc_colors as $key => $value) {
+               $product->productColors()->create([
+                'product_id'=>$product->id,
+                'color_id'=>$value,
+                'quantity'=>$request->product_quantity[$key]?? 0
+
+               ]);
+            }
+
         }
         return redirect('admin/products')->with('message','product is added successfully');
     

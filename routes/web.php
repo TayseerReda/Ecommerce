@@ -51,5 +51,17 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 
 
     });
+
+    Route::controller(App\Http\Controllers\Admin\ColorController::class)->group(function () {
+        Route::get('/colors','index');
+        Route::get('/color/create','create');
+        Route::post('/color','store');
+        Route::get('/color/{color}/edit' ,'edit');
+        Route::put('/color/{color}','update');
+        Route::get('/color/{color}/delete','destroy');
+
+
+
+    });
    
 });

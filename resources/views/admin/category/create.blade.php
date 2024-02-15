@@ -11,7 +11,7 @@
 @endif
 <div class="card">
     <h3 class="card-header">Category
-        <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end"> Back </a>
+        <a href="{{ url('admin/category') }}" class="btn btn-primary btn-sm float-end"> Back </a>
     </h3>
     <div class="card-body">
         <form action="{{ url('admin/category') }}" method="POST" enctype="multipart/form-data">

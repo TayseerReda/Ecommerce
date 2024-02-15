@@ -39,9 +39,15 @@
               <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details-tab-pane" type="button" role="tab" aria-controls="details-tab-pane" aria-selected="false">
                 Details</button>
             </li>
+
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
                 Product Image</button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="colo-tab" data-bs-toggle="tab" data-bs-target="#color-tab-pane" type="button" role="tab" aria-controls="color-tab-pane" aria-selected="false">
+               Product Color</button>
             </li>
             
           </ul>
@@ -150,6 +156,36 @@
                 </div>
             </div>
 
+
+  <div class="tab-pane border p-4 fade" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
+      <div class="mb-3">
+         
+          <label > Select Color </label>
+                    <div class="row">
+                        @forelse ($colors as $color)
+                            
+                       
+                        <div class="col-md-3 mb-3">
+                            <div class="border p-4">
+                                Color: <input type="checkbox" name="produc_colors[{{$color->id }}]" value="{{ $color->id}}"> {{ $color->name}} <br>
+                                Quantity: <input type="number" name="product_quantity[{{$color->id }}]" min="0" style="width: 70px"><br>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-md-12">
+                            <h1> No Colors Found </h1>
+                        </div>
+                    
+                            
+                        @endforelse
+                  
+
+                       
+                </div>
+                </div>
+            </div>
+
+            
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
