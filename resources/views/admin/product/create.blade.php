@@ -157,38 +157,37 @@
             </div>
 
 
-  <div class="tab-pane border p-4 fade" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
-      <div class="mb-3">
-         
-          <label > Select Color </label>
-                    <div class="row">
-                        @forelse ($colors as $color)
+            <div class="tab-pane border p-4 fade" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
+                <div class="mb-3">
+                
+                <label > Select Color </label>
+                            <div class="row">
+                               
+                                @forelse ($colors as $color)
+                                <div class="col-md-3 mb-3">
+                                    <div class="border p-4">
+                                        Color: <input type="checkbox" name="produc_colors[{{$color->id }}]" value="{{ $color->id}}"> {{ $color->name}} <br>
+                                        Quantity: <input type="number" name="product_quantity[{{$color->id }}]" min="0" style="width: 70px"><br>
+                                    </div>
+                                </div>
+                                @empty
+                                <div class="col-md-12">
+                                    <h1> No Colors Found </h1>
+                                </div>
                             
-                       
-                        <div class="col-md-3 mb-3">
-                            <div class="border p-4">
-                                Color: <input type="checkbox" name="produc_colors[{{$color->id }}]" value="{{ $color->id}}"> {{ $color->name}} <br>
-                                Quantity: <input type="number" name="product_quantity[{{$color->id }}]" min="0" style="width: 70px"><br>
-                            </div>
-                        </div>
-                        @empty
-                        <div class="col-md-12">
-                            <h1> No Colors Found </h1>
-                        </div>
-                    
-                            
-                        @endforelse
-                  
+                                    
+                                @endforelse
+                        
 
-                       
-                </div>
+                            
+                            </div>
                 </div>
             </div>
 
             
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+            </div>
         </div>
             
         </div>

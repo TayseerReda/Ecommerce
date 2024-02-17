@@ -44,6 +44,11 @@
               <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">
                 Product Image</button>
             </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="colo-tab" data-bs-toggle="tab" data-bs-target="#color-tab-pane" type="button" role="tab" aria-controls="color-tab-pane" aria-selected="false">
+                 Product Color</button>
+            </li>
             
           </ul>
         <div class="tab-content" id="myTabContent">
@@ -164,6 +169,56 @@
                 </div>
             </div>
 
+
+            <div class="tab-pane border p-4 fade" id="color-tab-pane" role="tabpanel" aria-labelledby="color-tab" tabindex="0">
+                <div class="mb-3">
+                
+                <label > Select Color </label>
+                    <div class="row">
+                        @forelse ($colors as $color)
+                        <div class="col-md-3 mb-3">
+                            <div class="border p-4">
+                                Color: <input type="checkbox" name="produc_colors[{{$color->id }}]" value="{{ $color->id}}"> {{ $color->name}} <br>
+                                Quantity: <input type="number" name="product_quantity[{{$color->id }}]" min="0" style="width: 70px"><br>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-md-12">
+                            <h1> No Colors Found </h1>
+                        </div>
+                    
+                            
+                        @endforelse
+                    </div>
+                </div>
+                <div class="table-responsive mt-4 mb-4">
+                    
+                    <table class="table table-bordered table-sm">
+                       <thead>
+                        <th>Color Name</th>
+                        <th>Quantity</th>
+                        <th>Delete</th>
+                       </thead>
+                       <tbody>
+                        @foreach ($product->productColors as $productcolor)
+                        <tr class="prod-color-tr">
+                        <td>{{ $productcolor->colors->name }}</td>
+                        <td>
+                            <div class="input-group mb-3" style="width: 150px" >
+                                <input type="text" value="{{$productcolor->quantity }}" class="productColorQuantity form-control form-control-sm ">
+                                <button value="{{$productcolor->id}}" class="updateProductColor btn btn-primary btn-sm text-white ">Update</button>
+
+                            </div>
+                        </td>
+                        <td><button value="{{$productcolor->id}}"  class="deleteProductColor btn btn-danger btn-sm text-white">Delete</button></td>
+                        </tr>
+                        @endforeach
+                       </tbody>
+                            
+                        
+                    </table>
+                </div>
+            </div>
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
@@ -175,4 +230,64 @@
       </div>
     </div>
     
+    @endsection
+    @section('scripts')
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+             headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $(document).on('click','.updateProductColor' ,function () {
+            var product_id="{{ $product->id }}";
+            var product_color_id=$(this).val();
+            // alert(product_color_id);
+            var qty=$(this).closest('.prod-color-tr').find('.productColorQuantity').val();
+            
+            if(qty<=0)
+            {
+                alert('quantity is required');
+                return false;
+            }
+            var data={
+                'product_id':product_id,
+                 'qty':qty
+
+            };
+           
+            $.ajax({
+                type: "POST",
+                url: "/admin/productColor/"+product_color_id,
+                data: data,
+                success: function (response) {
+                  
+                    alert(response.message)
+                    
+                }
+           
+            });
+        });
+
+        $(document).on('click','.deleteProductColor', function () {
+            var prod_id=$(this).val();
+            var thisClick=$(this);
+
+            $.ajax({
+                type: "GET",
+                url: "/admin/deleteProductColor/"+prod_id,
+                success: function (response) {
+                    thisClick.closest('prod-color-tr').remove();
+                    alert(response.message);
+                    
+                }
+            });
+            
+        });
+            
+    });
+    
+    </script>
     @endsection

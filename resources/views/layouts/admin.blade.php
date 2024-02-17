@@ -7,6 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- plugins:css -->
@@ -56,7 +57,7 @@
   <script src="{{ asset('admin/js/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
   <!-- End custom js for this page-->
-
+  @yield('scripts')
   @livewireStyles
   @stack('script')
 </head>
