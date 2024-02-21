@@ -37,7 +37,7 @@ class CategoryController extends Controller
             $ext=$file->getClientOriginalExtension();
             $fileName=time().'.'.$ext;
             $file->move('uploads/category/',$fileName);
-            $category->image=$fileName;
+            $category->image='uploads/category/'.$fileName;
         }
         $category->save();
         return redirect('admin/category')->with('message','Category is added successfully');
@@ -72,7 +72,7 @@ class CategoryController extends Controller
             $ext=$file->getClientOriginalExtension();
             $fileName=time().'.'.$ext;
             $file->move('uploads/category/',$fileName);
-            $category->image=$fileName;
+            $category->image='uploads/category/'.$fileName;
         }
         $category->update();
         return redirect('admin/category')->with('message','Category is updated successfully');
