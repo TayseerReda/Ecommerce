@@ -38,6 +38,7 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 
 
     });
+    //brand
     Route::get('/brands',App\Http\Livewire\Admin\Brand\Index::class);
     Route::controller(App\Http\Controllers\Admin\ProductControlle::class)->group(function () {
         Route::get('/products','index');
@@ -65,5 +66,13 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 
 
     });
-   
+    Route::controller(App\Http\Controllers\Admin\SliderController::class)->group(function () {
+        Route::get('/slider','index');
+        Route::get('/slider/create','create');
+        Route::post('/slider','store');
+        Route::get('/slider/{slider}/edit' , 'edit');
+        Route::put('/slider/{slider}' , 'update');
+        Route::get('/slider/{slider}/delete' , 'destroy');
+
+    });
 });
