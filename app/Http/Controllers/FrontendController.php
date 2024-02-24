@@ -18,4 +18,20 @@ class FrontendController extends Controller
         $categories=Category::all();
         return view('frontend.collections.category.index',compact('categories'));
     }
+    public function products($category_slug)
+    {
+        $categories=Category::where('slug',$category_slug)->first();
+       
+        if($categories)
+        {
+            // $products=$categories->products()->get();
+           
+            return view('frontend.collections.product.index',compact('categories')); 
+        }
+        else
+        {
+            return redirect()->back()->with('message','No Products available for this category');
+        }
+
+    }
 }

@@ -38,6 +38,7 @@ class ProductControlle extends Controller
             'category_id'=>$validatedData['category_id'],
             'name'=>$validatedData['name'],
             'slug'=>$validatedData['slug'],
+            'brand'=>$validatedData['brand'],
             'small_description'=>$validatedData['small_description'],
             'description'=>$validatedData['description'],
             'meta_title'=>$validatedData['meta_title'],
@@ -60,7 +61,7 @@ class ProductControlle extends Controller
                 $file->move('uploads/product/',$fileName);
                 $product->productImages()->create([
                     'product_id'=>$product->id,
-                    'image'=>$fileName,
+                    'image'=>'uploads/product/'.$fileName,
                 ]);
             }
         }
@@ -79,6 +80,7 @@ class ProductControlle extends Controller
             }
 
         }
+       
        
         return redirect('admin/products')->with('message','product is added successfully');
     
@@ -99,7 +101,7 @@ class ProductControlle extends Controller
     public function destroy_image($id)
     {
         $image= ProductImage::find($id);
-        $path='uploads/product/'.$image->image;
+        $path=$image->image;
         if(File::exists($path)){
             File::delete($path);
 
@@ -117,6 +119,7 @@ class ProductControlle extends Controller
             'category_id'=>$validatedData['category_id'],
             'name'=>$validatedData['name'],
             'slug'=>$validatedData['slug'],
+            'brand'=>$validatedData['brand'],
             'small_description'=>$validatedData['small_description'],
             'description'=>$validatedData['description'],
             'meta_title'=>$validatedData['meta_title'],
@@ -143,7 +146,7 @@ class ProductControlle extends Controller
                 $file->move('uploads/product/',$fileName);
                 $product->productImages()->create([
                     'product_id'=>$product->id,
-                    'image'=>$fileName,
+                    'image'=>'uploads/product/'.$fileName,
                 ]);
             }
         }
@@ -170,7 +173,7 @@ public function destroy($id)
 {
     $product=Product::find($id);
     foreach ($product->productImages as $image) {
-        $path='uploads/product/'.$image->image;
+        $path=$image->image;
         if(File::exists($path)){
             File::delete($path);
 
