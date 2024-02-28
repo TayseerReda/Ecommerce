@@ -36,8 +36,7 @@ class ProductFormRequest extends FormRequest
             'original_price'=>['integer','required'],
             'selling_price'=>['integer','required'],
             'quantity'=>['integer','required'],
-            'trending'=>['required'],
-            'status'=>['required'],
+            
             'image'=>['nullable'],
             
 

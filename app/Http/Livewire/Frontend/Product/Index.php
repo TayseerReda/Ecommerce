@@ -7,8 +7,8 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $products,$categories,$brandInputs=[];
-    protected $queryString = ['brandInputs'];
+    public $products,$categories,$brandInputs=[],$priceInputs;
+    protected $queryString = ['brandInputs','priceInputs'];
 
 
 
@@ -22,6 +22,12 @@ class Index extends Component
         $this->products=Product::where('category_id',$this->categories->id)
         ->when($this->brandInputs,function($q){
             $q->whereIn('brand',$this->brandInputs);
+        })
+        ->when($this->priceInputs=='low-to-high',function($q2){
+            $q2->orderBy('selling_price','ASC');
+        })
+        ->when($this->priceInputs=='high-low-to',function($q2){
+            $q2->orderBy('selling_price','DESC');
         })
         ->where('status','0')->get();
         return view('livewire.frontend.product.index',[

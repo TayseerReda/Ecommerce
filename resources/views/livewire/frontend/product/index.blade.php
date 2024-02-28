@@ -1,5 +1,6 @@
 <div>
     <div class="row">
+
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
@@ -14,7 +15,33 @@
                     @endforeach
                 </div>
             </div>
+            
+            <div class="mt-3">
+                
+                <div class="">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Price</h4>
+                        </div>
+                        <div class="card-body">
+                            <label class="d-block">
+                                <input type="radio" value="low-to-high" wire:model="priceInputs">Low to High
+
+                            </label>
+                            <label class="d-block">
+                                <input type="radio" value="high-low-to" wire:model="priceInputs">High to Low  
+
+                            </label>
+                          
+                 
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
 
         <div class="col-md-9">
             <div class="row">
@@ -29,12 +56,17 @@
                            @endif
                           
                            
-                            <img src="{{ asset($product->productImages[0]->image) }}" alt="">
+                      
+                               <a href="{{ url('/collection/' . $categories->slug . '/' . $product->slug) }}">
+                                <img src="{{ asset($product->productImages[0]->image) }}" alt="">
+                                </a>
+                                
+
                         </div>
                         <div class="product-card-body">
                             <p class="product-brand">{{ $product->brand }}</p>
                             <h5 class="product-name">
-                               <a href="">
+                                <a href="{{ url('/collection/' . $categories->slug . '/' . $product->slug) }}">
                                     {{$product->name}}
                                </a>
                             </h5>
