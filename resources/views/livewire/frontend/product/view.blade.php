@@ -1,6 +1,11 @@
 <div>
     <div class="py-3 py-md-5 bg-light">
         <div class="container">
+            @if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
             <div class="row">
                 <div class="col-md-5 mt-3">
                     <div class="bg-white border">
@@ -70,7 +75,9 @@
                         </div>
                         <div class="mt-2">
                             <a href="" class="btn btn1"> <i class="fa fa-shopping-cart"></i> Add To Cart</a>
-                            <a href="" class="btn btn1"> <i class="fa fa-heart"></i> Add To Wishlist </a>
+                            <button type="button" class="btn btn1" wire:click="addToWishList({{ $product->id }})">
+                                 <i class="fa fa-heart"></i> Add To Wishlist
+                             </button>
                         </div>
                         <div class="mt-3">
                             <h5 class="mb-0">Small Description</h5>
@@ -89,7 +96,7 @@
                         </div>
                         <div class="card-body">
                             <p>
-                                {{ $product->description }}                            </p>
+                                {{ $product->description }} </p>
                         </div>
                     </div>
                 </div>

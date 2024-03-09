@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class View extends Component
@@ -12,6 +14,37 @@ class View extends Component
     {
         $this->categories=$categories;
         $this->products=$products;
+    }
+    public function addToWishList($product_id)
+    {
+        // dd('hi');
+        if(Auth::check())
+        {
+
+            if(Wishlist::where('user_id',auth()->user()->id)->where('product_id',$product_id)->exists())
+            {
+                session()->flash('message','Already Added to wishList');
+                return false;
+
+
+            }
+            else{
+                Wishlist::create([
+                    'product_id'=>$product_id,
+                    'user_id'=>auth()->user()->id,
+    
+                ]);
+                session()->flash('message','WishList Added successfully');
+
+            }
+        }
+        else
+        {
+            // dd($product_id);
+            session()->flash('message','Please Login To Continue');
+            return false;
+
+        }
     }
     public function colorselected($productColor_id){
        $productColor=$this->products->productColors()->where('id',$productColor_id)->first();
