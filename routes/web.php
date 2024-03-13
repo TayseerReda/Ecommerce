@@ -27,10 +27,19 @@ Route::get('/collections',[App\Http\Controllers\FrontendController::class, 'cate
 Route::get('/collection/{slug}',[App\Http\Controllers\FrontendController::class, 'products']);
 Route::get('/collection/{category_slug}/{product_slug}',[App\Http\Controllers\FrontendController::class, 'productsView']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //wishlist
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::get('wishlist', [App\Http\Controllers\frontend\WishlistController::class, 'index']);
+    });
+    
+});    
 
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
     #category routes
 

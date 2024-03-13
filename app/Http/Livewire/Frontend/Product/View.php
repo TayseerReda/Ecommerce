@@ -35,6 +35,7 @@ class View extends Component
     
                 ]);
                 session()->flash('message','WishList Added successfully');
+                $this->emit('deleteOrUpdate');
 
             }
         }
