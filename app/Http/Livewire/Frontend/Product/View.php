@@ -8,7 +8,25 @@ use Livewire\Component;
 
 class View extends Component
 {
-    public $categories, $products,$productColorQuantity;
+    public $categories, $products,$productColorQuantity,$value=1;
+
+    public function decrement()
+    {
+        if($this->value>1)
+        {
+            $this->value--;
+        }
+
+    }
+    public function increment()
+    {
+        if($this->value<10)
+        {
+            $this->value++;
+        }
+
+    }
+
 
     public function mount($categories, $products)
     {

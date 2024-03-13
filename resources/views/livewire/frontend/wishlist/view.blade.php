@@ -25,7 +25,7 @@
                <div class="cart-item">
                    <div class="row">
                        <div class="col-md-6 my-auto">
-                           <a href="">
+                           <a href="{{url('collection/'.$item->products->category->slug.'/'.$item->products->slug)  }}">
                                <label class="product-name">
                                    <img src="{{ $item->products->productImages[0]->image}}" style="width: 50px; height: 50px" alt="">
                                    {{ $item->products->name }}
