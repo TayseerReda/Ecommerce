@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Livewire\Frontend\Card\CardShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +29,18 @@ Route::get('/collection/{slug}',[App\Http\Controllers\FrontendController::class,
 Route::get('/collection/{category_slug}/{product_slug}',[App\Http\Controllers\FrontendController::class, 'productsView']);
 
     //wishlist
-Route::middleware(['auth'])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('wishlist', [App\Http\Controllers\frontend\WishlistController::class, 'index']);
+        Route::get('/card', [App\Http\Controllers\frontend\CardController::class, 'index']);
+        // Route::get('/card',CardShow::class);
     });
     
-});    
+ 
 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
 Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
