@@ -112,9 +112,9 @@
                                     <h4>Price</h4>
                                 </div>
                               
-                                <div class="col-md-2">
+                                {{-- <div class="col-md-2">
                                     <h4>Quantity</h4>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-2">
                                     <h4>Remove</h4>
                                 </div>
@@ -125,8 +125,8 @@
                             @forelse ($wishListItems as $item)
                                 
                             <div class="row">
-                                <div class="col-md-6 my-auto">
-                                    <a href="">
+                                <div class="mt-4 col-md-6 my-auto ">
+                                    <a href="{{url('collection/'.$item->products->category->slug.'/'.$item->products->slug)  }}">
                                         <label class="product-name">
                                            
                                             <img src="{{ $item->products->productImages[0]->image}}" style="width: 50px; height: 50px" alt="">
@@ -135,12 +135,12 @@
                                     </a>
                                 </div>
                                 <div class="col-md-2 my-auto">
-                                    <label class="price"> {{ $item->products->selling_price }} </label>
+                                    <label class="price"> ${{ $item->products->selling_price }} </label>
                                 </div>
                                 {{-- <div class="col-md-2 my-auto">
                                     <label class="color">{{  $item->productColors->colors->name }} </label>
                                 </div> --}}
-                                <div class="col-md-2 col-7 my-auto">
+                                {{-- <div class="col-md-2 col-7 my-auto">
                                     <div class="quantity">
                                         <div class="input-group">
                                             <span class="btn btn1"><i class="fa fa-minus"></i></span>
@@ -150,7 +150,7 @@
                                     </div>
                                    
                                 </div>
-                                
+                                 --}}
                                 <div class="col-md-2 col-5 my-auto">
                                     <div class="remove">
                                         <button type="button" wire:click='deleteItem({{$item->product_id}})' class="btn btn-danger btn-sm">
